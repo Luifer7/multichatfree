@@ -112,7 +112,6 @@ const searchPerson = () => {
 }
 .name{
     font-size: .7em;
-    text-transform: capitalize;
 }
 
 .description {

@@ -62,7 +62,7 @@ export function useAuth() {
             id: us.id, 
             token: us.token, 
             email: us.email, 
-            name: name, 
+            name: name.toUpperCase(), 
             foto: photo,
             bg: bg,
             estado: 1

@@ -1,10 +1,13 @@
 <template>
 
 
-            <div
-                v-if="useData.currentUser"
-                class="box-profile d-flex gap-2 align-items-center justify-content-center m-2 rounded">
-                <div class="d-flex flex-column align-items-center">
+            <div v-if="useData.currentUser"
+                class="box-profile d-flex p-2 gap-2 align-items-center justify-content-center m-2 rounded">
+
+                <div class="d-flex  gap-1 align-items-end">
+                    <small style="font-size: 0.7em; font-weight: bold">{{
+                    useData.currentUser?.name
+                }}</small>
                 <img
                     :src="useData.currentUser?.foto"
                     width="35"
@@ -13,9 +16,7 @@
                     class="rounded-circle"
                     alt=""
                 />
-                <small style="font-size: 0.7em; font-weight: bold">{{
-                    useData.currentUser?.name
-                }}</small>
+               
                 </div>
 
                 <div v-if="useData.isLogin" class="container lognin">
@@ -38,6 +39,7 @@
                     Completar
                 </button>
                 </div>
+
             </div>
 
             <!-- Modal COMPLETAR PERFIL-->
@@ -74,6 +76,7 @@
                             placeholder="Escoge un nombre"
                             type="text"
                             class="form-control form-control-sm"
+                            maxlength="12"
                         />
                         </div>
                         <div class="mb-2">
