@@ -8,7 +8,9 @@ export const useDataStore = defineStore('data', () => {
   const users = ref([])
 
   const currentUser = ref(null)
-  
+  const AlternativeData = ref(null)
+  const anoterFav = ref([])
+  const noFav = ref([])
 
 const userForChat = ref(null)
 /*
@@ -71,5 +73,6 @@ const isLogin = ref(null)
 const spinner = ref(null)
 
 
-  return { userForChat, messages, currentUser, users, isLogin, spinner }
+  return { userForChat, messages, currentUser, users, isLogin, spinner,
+           AlternativeData, anoterFav, noFav }
 })

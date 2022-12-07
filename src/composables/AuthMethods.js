@@ -125,11 +125,11 @@ export function useAuth() {
             let current = { id: user.uid, token: user.refreshToken, email: user.email, 
             name: user.displayName, foto: user.photoURL, estado: null}
             useData.currentUser = current
+            useData.AlternativeData = user
         } else { useData.isLogin = false }
 
       })
     }
-
 
 
     onAuthStateChanged(auth, (user) => {
@@ -138,7 +138,10 @@ export function useAuth() {
             let current = { id: user.uid, token: user.refreshToken, email: user.email, 
             name: user.displayName, foto: user.photoURL, estado: null}
             useData.currentUser = current
-        } else { useData.isLogin = false }
+            useData.AlternativeData = user
+        } else { 
+          useData.isLogin = false 
+        }
 
       })
 

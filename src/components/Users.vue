@@ -5,7 +5,7 @@
     <div class="users-into-box" >
         
         <div class="users-search  d-flex align-items-center justify-content-center" >
-            <input type="text" v-model="query" placeholder="Buscar persona" class="form-control m-3 users-input" >
+            <input type="text" v-model="query" placeholder="Buscar" class="form-control m-3 text-center users-input" >
         </div>
 
         <div class="users-persons">
@@ -26,8 +26,6 @@
                     </div>
 
                 </div>
-
-              
 
             </div>
         

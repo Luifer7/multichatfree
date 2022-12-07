@@ -3,6 +3,7 @@
 import { useDataStore } from "../stores/data";
 import { collection, query, where, addDoc, getDocs, onSnapshot } from "firebase/firestore";
 import { auth, db } from "../firebase";
+import Swal from 'sweetalert2'
 
 export function useAmdin() {
 
@@ -64,6 +65,7 @@ export function useAmdin() {
      usuarios.push(doc.data())
     })
     useData.users = usuarios
+
     useData.users = useData.users.filter(field => field.id != useData.currentUser.id)
   }
 
@@ -71,11 +73,32 @@ export function useAmdin() {
 
   const getUserToChat = (user) => {
     useData.userForChat = user
+  
   }
 
-  //getUserToChat(useData.users[0])
 
+  const addFav = async (data) => {
+  const docRef = await addDoc(collection(db, "fav"), {
+      date: Date.now(),
+      id: data.id,
+      name: data.name,
+      foto: data.foto,
+      from: useData.currentUser?.id
+    })
+    await getFav()
+  }
 
+  const getFav = async () => {
+    const querySnapshot = await getDocs(collection(db, "fav"))
+    let fav = [] 
+    querySnapshot.forEach((doc) => {
+     fav.push(doc.data())
+    })
+   useData.anoterFav = fav
+   useData.anoterFav = useData.anoterFav.filter(field => field.from === useData.currentUser?.id )
+  }
 
-  return { addMessage, getUserToChat }
+  getFav()
+
+  return { addMessage, getUserToChat, addFav, getFav }
 }

@@ -10,19 +10,28 @@
         v-for="item of settingsIcons" :key="item.id">
 
             <strong v-if="item.color === 11" >
-                <i class="bi bi-person-circle h2"></i>
+                <RouterLink to="/about" >
+                    <i class="bi bi-person-circle h2"></i>
+                </RouterLink>  
+            </strong>
+
+            <strong v-if="item.color === 33" >
+                <RouterLink to="/" >
+                    <i class="bi bi-chat-fill h2"></i>
+                </RouterLink>  
             </strong>
 
             <strong v-if="item.color === 22" >
-                <i class="bi bi-star-fill h2"></i>
+                <RouterLink to="/fav" >
+                    <i class="bi bi-star-fill h2"></i>
+                </RouterLink>  
             </strong>
-            
-            <strong v-if="item.color === 33" >
-                <i class="bi bi-bell-fill h2"></i>
-            </strong>
+        
             
             <strong v-if="item.color === 44" >
-                <i class="bi bi-gear-fill h2"></i>
+                <RouterLink to="/" >
+                    <i class="bi bi-gear-fill h2"></i>
+                </RouterLink>  
             </strong>
 
         </span>
@@ -36,8 +45,8 @@ import { ref } from "vue";
 
 const settingsIcons = ref([
     {id: 1, action: "people", color: 11}, 
-    {id: 2, action: "grupos", color: 22},
-    {id: 3, action: "perfil", color: 33}, 
+    {id: 2, action: "grupos", color: 33},
+    {id: 3, action: "perfil", color: 22}, 
     {id: 4, action: "settings", color: 44}
 ])
 
