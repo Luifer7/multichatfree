@@ -9,7 +9,7 @@
         
        
         <div class="chat-user border d-flex align-items-center justify-content-between p-1"
-        @click="ffff(useData.userForChat)"
+        @click="checkFavs(useData.userForChat)"
         >
 
             <div class="d-flex align-items-center justify-content-center gap-2 m-1 flex-wrap" >
@@ -69,7 +69,7 @@ const { addFav } = useAmdin()
 
 const newFav = ref([])
 
-const ffff = async (data) => {
+const checkFavs = async (data) => {
 
     const citiesRef = collection(db, "fav")
     const q = query(citiesRef, where("from", "==", `${useData.currentUser?.id}`));
