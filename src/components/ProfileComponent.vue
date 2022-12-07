@@ -53,9 +53,8 @@
                 <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h5 class="modal-title fs-5" id="staticBackdropLabel">
-                        Agregar un nombre de usuario, una foto a tu perfil y una imagen de
-                        background.
+                    <h5 class="modal-title fs-4 fw-bold text-center" id="staticBackdropLabel">
+                        Completa tu perfil
                     </h5>
                     <button
                         type="button"
@@ -81,29 +80,33 @@
                         <input
                             v-model="foto"
                             required
-                            placeholder="URL de foto"
+                            placeholder="URL de foto de perfil"
                             type="text"
                             class="form-control form-control-sm"
                         />
                         </div>
                         <div class="mb-2">
-                        <input
-                            v-model="bg"
-                            required
-                            placeholder="URL de Backgraund"
-                            type="text"
-                            class="form-control form-control-sm"
-                        />
+                            <select  required  v-model="bg" class="form-select" aria-label="Default select example">
+                            <option selected>Color de background</option>
+                            <option value="1">Verde</option>
+                            <option value="2">Rojo</option>
+                            <option value="3">Amarillo</option>
+                            <option value="4">Azul</option>
+                            </select>
                         </div>
-                        <div class="mb-1">
+
+                        <div class="mb-2">
+                       <div class="mb-2" >
                         <button
                             data-bs-dismiss="modal"
                             aria-label="Close"
                             type="submit"
-                            class="btn btn-sm btn-success"
+                            class="btn btn-sm btn-success w-100"
                         >
+                        <span v-if="useData.spinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             Guardar
                         </button>
+                       </div>
                         </div>
                     </form>
                     </div>
@@ -139,17 +142,18 @@ const bg = ref("");
 const cerrar = () => {
   Swal.fire({
     icon: 'question',
-    title: "Salir de la aplicacion?",
+    title: "Cerrar sesion",
     showConfirmButton: false,
     showDenyButton: true,
     showCancelButton: true,
-    denyButtonText: `Si.`
+    denyButtonText: `Si`
   }).then((result) => {
     if (result.isDenied) {
         userLogout()
         Swal.fire({
             icon: 'error',
             title: 'Cerraste sesion!',
+            showConfirmButton: false,
             timer: 1500
         });
     }

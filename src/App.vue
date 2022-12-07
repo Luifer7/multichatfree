@@ -11,7 +11,6 @@ const useData = useDataStore()
   <div class="box-nav d-flex align-items-center justify-content-between">
     <span class="fw-bold text-dark m-2 h4">MultichatFree</span>
 
-   
     <ProfileComponent></ProfileComponent>
   
   </div>
@@ -22,7 +21,10 @@ const useData = useDataStore()
     <RouterView />
     
   </div>
+  
 </template>
+
+
 
 <style scoped>
 .box-nav {

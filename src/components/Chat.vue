@@ -8,9 +8,10 @@
     <div class="chat-into-box">
         
         <!--  :style="{ 'background-image': 'url(' + useData.userForChat?.bg + ')' }" -->
-        <div class="chat-user border d-flex align-items-center justify-content-between p-1">
+        <div class="chat-user  rounded border d-flex align-items-center justify-content-between p-1">
             <div class="d-flex align-items-center justify-content-center gap-2 m-1 flex-wrap" >
-                <img :src="useData.userForChat?.foto" width="35" height="35" style="object-fit: cover;"
+                <img :src="useData.userForChat?.foto" width="40" height="40" 
+                style="object-fit: cover; border: 3px solid white;"
                  alt="foto" class="rounded-circle">
                 <h4 class="text-dark" >{{useData.userForChat?.name}}</h4>
                 <b v-if="useData.userForChat?.estado === 1" class="m-0 p-0 description text-success" ><i class="bi bi-circle-fill"></i></b>

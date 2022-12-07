@@ -5,6 +5,7 @@ import { signInWithEmailAndPassword, onAuthStateChanged,
 import { doc, setDoc, collection, addDoc, updateDoc } from "firebase/firestore"; 
 import { auth, db } from "../firebase";
 import Swal from 'sweetalert2'
+import { async } from "@firebase/util";
 
 
 export function useAuth() {
@@ -51,11 +52,12 @@ export function useAuth() {
           });
     }
 
+
     const editUser = async (name, photo, bg, us) => {
         await updateProfile(auth.currentUser, {
             displayName: name, photoURL: photo
           }).then(() => {
-        
+
             const docRef = addDoc(collection(db, "usuarios"), {
             id: us.id, 
             token: us.token, 
@@ -63,11 +65,14 @@ export function useAuth() {
             name: name, 
             foto: photo,
             bg: bg,
-            estado: null
+            estado: 1
           })
-
+          
+         getUserData()
         }).catch((error) => { console.log(error)})  
     }
+
+
 
     const userRegister = async (email, password) => {
         useData.spinner = true
@@ -104,6 +109,29 @@ export function useAuth() {
         
     }
 
+    const getUserData = async () => {
+    await onAuthStateChanged(auth, (user) => {
+        if (user != null) {
+            useData.spinner = false
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Usuario completado!',
+              showConfirmButton: false,
+              timer: 1500
+            })
+          
+            useData.isLogin = true
+            let current = { id: user.uid, token: user.refreshToken, email: user.email, 
+            name: user.displayName, foto: user.photoURL, estado: null}
+            useData.currentUser = current
+        } else { useData.isLogin = false }
+
+      })
+    }
+
+
+
     onAuthStateChanged(auth, (user) => {
         if (user != null) {
             useData.isLogin = true
@@ -116,7 +144,6 @@ export function useAuth() {
 
      
 
-    
     return { userLogin, userLogout, editUser, userRegister }
   }
   
