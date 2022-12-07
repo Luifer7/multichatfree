@@ -70,16 +70,18 @@ const { addFav } = useAmdin()
 const newFav = ref([])
 
 const ffff = async (data) => {
-    
+
     const citiesRef = collection(db, "fav")
-    const q = query(citiesRef, where("id", "==", `${data.id}`));
+    const q = query(citiesRef, where("from", "==", `${useData.currentUser?.id}`));
     const querySnapshot = await getDocs(q)
     let dd = {}
+    let gg = []
     querySnapshot.forEach((doc) => {
-        dd = doc.data()
+        gg.push(doc.data())    
     })
-
-    if (dd.id === data.id) {
+    gg = gg.filter(field => field.id === data.id)
+    
+    if (gg[0]?.id === data.id) {
         Swal.fire({
             showConfirmButton: false,
             position: 'center',
