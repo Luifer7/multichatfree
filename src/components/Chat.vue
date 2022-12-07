@@ -70,8 +70,6 @@ const useData = useDataStore()
     height: 74%;
     overflow: auto;
     position: relative;
-    *background-image: url(https://www.shutterstock.com/image-vector/seamless-pattern-outline-icons-seo-260nw-659141167.jpg);
-    *background: rgba(148, 139, 158, 0.247);
     background-color: #f6f7f9;
 }
 
