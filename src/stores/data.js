@@ -66,8 +66,10 @@ const messages = ref([
 const messages = ref([])
 
 ////////////LOGIN//////////////
-const isLogin = ref(null)  
+const isLogin = ref(null) 
+
+const spinner = ref(null)
 
 
-  return { userForChat, messages, currentUser, users, isLogin }
+  return { userForChat, messages, currentUser, users, isLogin, spinner }
 })

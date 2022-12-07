@@ -19,46 +19,63 @@
 
   </div>
 
-  <div class="login" v-if="!useData.isLogin" >
-    
-      <form v-on:submit.prevent="userLogin(email, password)" class="p-2 form-login" >
-        <h5 class="" >Iniciar sesion</h5>
-        <div class="mb-2">
-          <input v-model="email" type="text" class="form-control form-control-sm" placeholder="email" >
-        </div>
-        <div class="mb-2">
-          <input v-model="password" type="text" class="form-control form-control-sm" placeholder="password" >
-        </div>
-      <button  type="submit" class="btn btn-success btn-sm">Login</button>
-    </form>
 
-    <div class="text-center" data-bs-toggle="modal" data-bs-target="#registerUser" >
-      No tienes cuenta?
-      <button class="btn btn-sm btn-primary" >
-        Registrate
-      </button>
-    </div>
+        <!-- LOGIN -->
+      <div class="login" v-if="!useData.isLogin" >
+        
+          <form v-on:submit.prevent="userLogin(email, password)" class="p-2 form-login p-3" 
+          style="height: 70%;">
 
-  </div>
+            <h3 class="text-center mb-3" >Iniciar sesion</h3>
+            <div class="mb-3">
+              <input v-model="email" required type="text" class="form-control form-control-sm" placeholder="email" >
+            </div>
+            <div class="mb-3">
+              <input v-model="password" required type="text" class="form-control form-control-sm" placeholder="password" >
+            </div>
+            <div class="mb-3" >
+              <button   type="submit" class="btn btn-success btn-sm w-100 fw-bold">
+                <span v-if="useData.spinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Iniciar sesion
+              </button>
+            </div>
+            
+            <div class="text-center mt-4 card-footer" data-bs-toggle="modal" data-bs-target="#registerUser" >
+            <div class="mt-3" >
+              No tienes cuenta?
+              <button class="btn btn-sm btn-primary" >
+                Registrate
+              </button>
+            </div>
+            </div>
 
+          </form>
+
+      </div>
+
+
+  
    <!-- Modal -->
-   <div class="modal fade" id="registerUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade" id="registerUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Register user</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Crea una cuenta de usuario.</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form v-on:submit.prevent="userRegister(emailRegister, passwordRegister)" >
                     <div class="mb-2">
-                        <input v-model="emailRegister" required placeholder="Email" type="text" class="form-control form-control-sm">
+                        <input  v-model="emailRegister" required placeholder="Email" type="text" class="form-control form-control-sm">
                     </div>
                     <div class="mb-2">
                         <input v-model="passwordRegister" required placeholder="Password" type="text" class="form-control form-control-sm">
                     </div>
                     <div class="mb-1">
-                        <button data-bs-dismiss="modal" aria-label="Close"  type="submit" class="btn btn-sm btn-success">Guardar</button>
+                        <button data-bs-dismiss="modal" aria-label="Close"  type="submit" class="btn fw-bold w-100 btn-sm btn-success">
+                          <span v-if="useData.spinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                          Crear usuario
+                        </button>
                     </div>
                 </form>
             </div>
@@ -68,7 +85,7 @@
             </div>
         </div>
 
-    </div>
+  </div>
 
 
 
@@ -95,6 +112,10 @@ const passwordRegister = ref('')
 </script>
 
 
+
+
+
+
 <style scoped>
 .box-chat{
   width: 100vw;
@@ -108,7 +129,6 @@ const passwordRegister = ref('')
 .form-login{
   height: 280px;
   width: 80%;
-  display: flex; flex-direction: column; justify-content: center; margin-top: 10px;
 }
   
 

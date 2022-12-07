@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword, onAuthStateChanged,
          signOut, updateProfile, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc, collection, addDoc, updateDoc } from "firebase/firestore"; 
 import { auth, db } from "../firebase";
+import Swal from 'sweetalert2'
 
 
 export function useAuth() {
@@ -11,14 +12,34 @@ export function useAuth() {
     const useData = useDataStore()
 
     const userLogin = async (email, password) => {
-      
+      useData.spinner = true
       await  signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
         const user = userCredential.user
+        if (user) {
+          useData.spinner = false
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
+            if (error) {
+              useData.spinner = false
+              Swal.fire({
+                title: errorCode,
+                text: errorMessage,
+                html:
+                `</b class="text-warning"> ${errorMessage} </b>`,
+                icon: 'error',
+                confirmButtonText: 'Ok'
+              })
+            }
         })
     }
 
@@ -49,15 +70,38 @@ export function useAuth() {
     }
 
     const userRegister = async (email, password) => {
-        
+        useData.spinner = true
         await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
         const user = userCredential.user
+        if (user) {
+          useData.spinner = false
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Usuario creado correctamente',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
         })
         .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message})
-   
+        const errorMessage = error.message
+          if (errorCode) {
+            useData.spinner = false
+            Swal.fire({
+              title: errorCode,
+              text: errorMessage,
+              html:
+              '<b>Formato email:</b> <b class="text-success">ejemplo@ejemplo.com</b> </br> ' +
+              '<b>Formato contraseña:</b> <b class="text-success">minimo 6 digitos</b> </b> ',
+              icon: 'error',
+              confirmButtonText: 'Ok'
+            })
+          }
+      })
+        
     }
 
     onAuthStateChanged(auth, (user) => {
@@ -69,6 +113,9 @@ export function useAuth() {
         } else { useData.isLogin = false }
 
       })
+
+     
+
     
     return { userLogin, userLogout, editUser, userRegister }
   }

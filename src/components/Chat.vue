@@ -6,6 +6,7 @@
 
     
     <div class="chat-into-box">
+        
         <!--  :style="{ 'background-image': 'url(' + useData.userForChat?.bg + ')' }" -->
         <div class="chat-user border d-flex align-items-center justify-content-between p-1">
             <div class="d-flex align-items-center justify-content-center gap-2 m-1 flex-wrap" >
