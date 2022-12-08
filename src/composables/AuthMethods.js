@@ -139,7 +139,6 @@ export function useAuth() {
             name: user.displayName, foto: user.photoURL, estado: null}
             useData.currentUser = current
             useData.AlternativeData = user
-            console.log(useData.currentUser)
         } else { 
           useData.isLogin = false 
         }

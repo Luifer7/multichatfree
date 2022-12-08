@@ -8,7 +8,7 @@
         :class="message.from === useData.currentUser?.id ?'message left':'message'">
             <div class="d-flex align-items-start justify-content-between"
             :class="message.from === useData.currentUser?.id ?'content-msg':''">
-                <img :src="message.foto" width="35" height="35" style="object-fit: cover;" 
+                <img :src="message?.foto" width="35" height="35" style="object-fit: cover;" 
                  class="rounded-circle" alt="">
                 <i class="content-message">{{message.content}}</i> 
             </div>

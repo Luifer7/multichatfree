@@ -18,7 +18,7 @@
                 <div class="d-flex align-items-center gap-1 img-box-responsive" >
 
                     <img width="30" height="30" style="object-fit: cover;" class="rounded-circle" 
-                    :src="user.foto" alt="" >
+                    :src="user?.foto" alt="" >
                     <div class="user-name d-flex flex-column" >
                         <strong class="m-0 p-0 name nn">{{user.name}}</strong>
                         <small v-if="user.estado === 1" class="m-0 p-0 description text-success fw-bold" >ON</small>
