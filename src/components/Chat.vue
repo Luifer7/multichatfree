@@ -20,6 +20,7 @@
                 <b v-if="useData.userForChat?.estado === 1" class="m-0 p-0 description text-success" ><i class="bi bi-circle-fill"></i></b>
                 <b v-if="useData.userForChat?.estado === 2" class="m-0 p-0 description text-danger" ><i class="bi bi-circle-fill"></i></b>
                 <b v-if="useData.userForChat?.estado === 3" class="m-0 p-0 description text-warning" ><i class="bi bi-circle-fill"></i></b>
+                
             </div>
 
              <div v-for="sss of useData.anoterFav" :key="sss.id" 

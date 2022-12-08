@@ -10,6 +10,7 @@ const useData = useDataStore()
 
   <div class="box-nav d-flex align-items-center justify-content-between">
     <span class="fw-bold text-dark m-2 h4">MultichatFree</span>
+    <small class="infoo" >Si no completan el perfil no podran chatear si les generó error el primero user, hagan uno nuevo mientras yo areglo a experiencia de usuario, gracias.</small>
 
     <ProfileComponent></ProfileComponent>
   
@@ -34,6 +35,10 @@ const useData = useDataStore()
 }
 .box-all {
   height: 89vh;
+}
+
+.infoo{
+  font-size: .6Sem;
 }
 
 
