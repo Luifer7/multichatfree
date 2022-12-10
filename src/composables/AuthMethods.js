@@ -8,6 +8,7 @@ import { auth, db } from "../firebase";
 import Swal from 'sweetalert2'
 import { useFormat } from "./FormatDay";
 import { useRouter } from "vue-router";
+import { async } from "@firebase/util";
 
 export function useAuth() {
 
@@ -64,21 +65,32 @@ export function useAuth() {
               displayName: username, 
               photoURL: "https://cutewallpaper.org/24/profile-icon-png/png-file-profile-icon-vector-png-transparent-png-980x980-free-download-on-nicepng.png"
           }).then(() => {
+
           const docRef = addDoc(collection(db, "usuarios"), {
           id: user.uid, token: user.refreshToken, email: user.email, name: username, 
           foto: "https://cutewallpaper.org/24/profile-icon-png/png-file-profile-icon-vector-png-transparent-png-980x980-free-download-on-nicepng.png",
-          estado: 1
+          estado: 1,
+          idDocument: 'nn'
+        }).then((result) => {
+            //Actualizo el user de una
+            const currentUserRef = doc(db, "usuarios", result.id);
+            updateDoc(currentUserRef, {
+              idDocument: result.id
+            })
         })
-    
         }).catch((error) => { console.log(error)})  
+
+       
 
         await anotherObserver()
 
     }
 
+
     
     // Observer alternativo
     const anotherObserver =  () => {
+
       onAuthStateChanged(auth, (user) => {
         if (user != null) {
           useData.isLogin = true;
@@ -88,7 +100,9 @@ export function useAuth() {
           };
 
           useData.currentUser = current;
-          useData.AlternativeData = user;
+          useData.alternativeData = user;
+
+
 
         } else {
           useData.isLogin = false;

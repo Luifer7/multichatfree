@@ -52,13 +52,23 @@ export function useAmdin() {
 
   const getUser = async () => {
     const querySnapshot = await getDocs(collection(db, "usuarios"))
+
     let usuarios = [] 
+    let idCurrentUser = []
+    let currentCompare = []
+
     querySnapshot.forEach((doc) => {
-     usuarios.push(doc.data())
+       usuarios.push(doc.data())
+       idCurrentUser.push({id: doc.id})
     })
     useData.users = usuarios
+    currentCompare = usuarios
 
-    useData.users = useData.users.filter(field => field.id != useData.currentUser.id)
+     currentCompare = currentCompare.filter(field => field.id === useData.currentUser.id)
+     useData.users = useData.users.filter(field => field.id != useData.currentUser.id)
+     idCurrentUser = idCurrentUser.filter(field => field.id === currentCompare[0]?.idDocument )
+     useData.idDocCurrentUser = idCurrentUser
+
   }
 
   getUser()

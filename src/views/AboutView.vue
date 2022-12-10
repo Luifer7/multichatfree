@@ -57,8 +57,8 @@
                 Editar imagen <i class="bi bi-image"></i>
               </button>
               
-              <button @click="ModalEditPhoto()" class="btn btn-sm btn-primary text-white fw-bold col-6">
-                Editar Username <i class="bi bi-person-fill"></i>
+              <button @click="ModalEditUsername()" class="btn btn-sm btn-primary text-white fw-bold col-6">
+                Editar Nombre <i class="bi bi-person-fill"></i>
               </button>
             
             </div>
@@ -72,11 +72,13 @@ import { useDataStore } from "../stores/data"
 import { ref } from "@vue/runtime-core"
 import { useAuth } from "../composables/AuthMethods"
 import { useFormat } from "../composables/FormatDay"
+import { useAmdin } from "../composables/ChatMethods"
 
 
 const useData = useDataStore()
 const { } = useAuth()
-const { ModalEditPhoto } = useFormat()
+const {} = useAmdin()
+const { ModalEditPhoto, ModalEditUsername } = useFormat()
 
 
 

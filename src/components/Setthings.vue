@@ -68,5 +68,10 @@ strong{
     cursor: pointer;
 }
 
+.router-link-active {
+    transition: .4s ease all;
+    color: #369e61;
+ }
+
 
 </style>
