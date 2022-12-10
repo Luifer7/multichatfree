@@ -12,13 +12,6 @@ export function useAmdin() {
   //Sin terminar
   const addMessage = async (message, yo, otro) => {
   
-    let newMessage = {
-        date: Date.now(),
-        content: message,
-        from: yo.id,
-        to: otro.id,
-        foto: yo.foto,
-    }
     const docRef = await addDoc(collection(db, "messages"), {
         date: Date.now(),
         content: message,
@@ -37,8 +30,7 @@ export function useAmdin() {
     })
    useData.messages = mess
   }
-
-  getMessage()
+        getMessage()
 
   const q = query(collection(db, "messages"))
   const unsubscribe = onSnapshot(q, (snapshot) => {

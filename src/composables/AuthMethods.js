@@ -2,15 +2,18 @@
 import { useDataStore } from "../stores/data"
 import { signInWithEmailAndPassword, onAuthStateChanged, 
          signOut, updateProfile, createUserWithEmailAndPassword } from "firebase/auth";
+         
 import { doc, setDoc, collection, addDoc, updateDoc } from "firebase/firestore"; 
 import { auth, db } from "../firebase";
 import Swal from 'sweetalert2'
-import { async } from "@firebase/util";
-
+import { useFormat } from "./FormatDay";
+import { useRouter } from "vue-router";
 
 export function useAuth() {
 
     const useData = useDataStore()
+    const { formatCurrentUser } = useFormat()
+    const router = useRouter()
 
     const userLogin = async (email, password) => {
       useData.spinner = true
@@ -47,39 +50,64 @@ export function useAuth() {
     const userLogout = async () => {
        await signOut(auth).then(() => {
            useData.currentUser = null
+           router.push('/')
           }).catch((error) => {
           
           });
     }
 
 
-    const editUser = async (name, photo, bg, us) => {
-        await updateProfile(auth.currentUser, {
-            displayName: name, photoURL: photo
-          }).then(() => {
+    //Actualiza y crea el usuario
+    const editUser = async (username, user) => {
 
-            const docRef = addDoc(collection(db, "usuarios"), {
-            id: us.id, 
-            token: us.token, 
-            email: us.email, 
-            name: name.toUpperCase(), 
-            foto: photo,
-            bg: bg,
-            estado: 1
-          })
-          
-         getUserData()
+        await updateProfile(auth.currentUser, {
+              displayName: username, 
+              photoURL: "https://cutewallpaper.org/24/profile-icon-png/png-file-profile-icon-vector-png-transparent-png-980x980-free-download-on-nicepng.png"
+          }).then(() => {
+          const docRef = addDoc(collection(db, "usuarios"), {
+          id: user.uid, token: user.refreshToken, email: user.email, name: username, 
+          foto: "https://cutewallpaper.org/24/profile-icon-png/png-file-profile-icon-vector-png-transparent-png-980x980-free-download-on-nicepng.png",
+          estado: 1
+        })
+    
         }).catch((error) => { console.log(error)})  
+
+        await anotherObserver()
+
+    }
+
+    
+    // Observer alternativo
+    const anotherObserver =  () => {
+      onAuthStateChanged(auth, (user) => {
+        if (user != null) {
+          useData.isLogin = true;
+          let current = {
+            id: user.uid, token: user.refreshToken, email: user.email,
+            name: user.displayName, foto: user.photoURL, estado: null
+          };
+
+          useData.currentUser = current;
+          useData.AlternativeData = user;
+
+        } else {
+          useData.isLogin = false;
+        }
+
+      })
     }
 
 
-
-    const userRegister = async (email, password) => {
+    const userRegister = async (email, password, username) => {
         useData.spinner = true
         await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
         const user = userCredential.user
+    
         if (user) {
+          
+          editUser(username, user)
+          
           useData.spinner = false
           Swal.fire({
             position: 'center',
@@ -105,41 +133,24 @@ export function useAuth() {
               confirmButtonText: 'Ok'
             })
           }
-      })
+        })
         
     }
 
-    const getUserData = async () => {
-    await onAuthStateChanged(auth, (user) => {
-        if (user != null) {
-            useData.spinner = false
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Usuario completado!',
-              showConfirmButton: false,
-              timer: 1500
-            })
-          
-            useData.isLogin = true
-            let current = { id: user.uid, token: user.refreshToken, email: user.email, 
-            name: user.displayName, foto: user.photoURL, estado: null}
-            useData.currentUser = current
-            useData.AlternativeData = user
-        } else { useData.isLogin = false }
 
-      })
-    }
-
-
+    // Observer
     onAuthStateChanged(auth, (user) => {
         if (user != null) {
             useData.isLogin = true
-            let current = { id: user.uid, token: user.refreshToken, email: user.email, 
+
+            let current = 
+            { id: user.uid, token: user.refreshToken, email: user.email, 
             name: user.displayName, foto: user.photoURL, estado: null}
+
             useData.currentUser = current
-            useData.AlternativeData = user
-        } else { 
+             formatCurrentUser(user) 
+             
+          } else { 
           useData.isLogin = false 
         }
 

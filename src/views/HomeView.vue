@@ -39,53 +39,58 @@
                   Iniciar sesion
               </button>
             </div>
-            
-            <div class="text-center mt-4 card-footer" data-bs-toggle="modal" data-bs-target="#registerUser" >
-            <div class="mt-3" >
+          
+          </form>
+
+          <div class="text-center mt-1 card-footer" data-bs-toggle="modal" data-bs-target="#registerUser" >
+            <div class="mt-1" >
               No tienes cuenta?
-              <button class="btn btn-sm btn-primary" >
+              <div class="w-100" >
+                <button class="btn btn-sm btn-primary w-100" >
                 Registrate
               </button>
+              </div>
             </div>
             </div>
-
-          </form>
 
       </div>
 
 
   
-   <!-- Modal -->
-  <div class="modal fade" id="registerUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Crea una cuenta de usuario.</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <!-- Modal -->
+      <div class="modal fade" id="registerUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Crea una cuenta de usuario.</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form v-on:submit.prevent="userRegister(emailRegister, passwordRegister, username)" >
+                        <div class="mb-2">
+                            <input  v-model="emailRegister" required placeholder="Email" type="text" class="form-control form-control-sm">
+                        </div>
+                        <div class="mb-2">
+                            <input v-model="passwordRegister" required placeholder="Password" type="text" class="form-control form-control-sm">
+                        </div>
+                        <div class="mb-2">
+                            <input v-model="username" required placeholder="Elige un nombre de usuario" type="text" class="form-control form-control-sm">
+                        </div>
+                        <div class="mb-1">
+                            <button data-bs-dismiss="modal" aria-label="Close"  type="submit" class="btn fw-bold w-100 btn-sm btn-success">
+                              <span v-if="useData.spinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                              Crear usuario
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <form v-on:submit.prevent="userRegister(emailRegister, passwordRegister)" >
-                    <div class="mb-2">
-                        <input  v-model="emailRegister" required placeholder="Email" type="text" class="form-control form-control-sm">
-                    </div>
-                    <div class="mb-2">
-                        <input v-model="passwordRegister" required placeholder="Password" type="text" class="form-control form-control-sm">
-                    </div>
-                    <div class="mb-1">
-                        <button data-bs-dismiss="modal" aria-label="Close"  type="submit" class="btn fw-bold w-100 btn-sm btn-success">
-                          <span v-if="useData.spinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                          Crear usuario
-                        </button>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-            </div>
-        </div>
 
-  </div>
+      </div>
 
 
 
@@ -108,6 +113,7 @@ const password = ref('')
 
 const emailRegister = ref('')
 const passwordRegister = ref('')
+const username = ref('')
 
 </script>
 
@@ -127,7 +133,7 @@ const passwordRegister = ref('')
   display: flex; align-items: center; justify-content: center; flex-direction: column;
 }
 .form-login{
-  height: 280px;
+  height: 200px;
   width: 80%;
 }
   
