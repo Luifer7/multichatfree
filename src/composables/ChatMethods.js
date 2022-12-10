@@ -11,15 +11,20 @@ export function useAmdin() {
 
   //Sin terminar
   const addMessage = async (message, yo, otro) => {
-  
+
+    let ahora = new Date()
+    let minuto = ahora.getMinutes()
+    let hora = ahora.getHours()
+    
     const docRef = await addDoc(collection(db, "messages"), {
-        date: Date.now(),
+        date: new Date(),
+        time: `${hora}:${minuto}`,
         content: message,
         from: yo.id,
         to: otro.id,
         foto: yo.foto
     })
-   // useData.messages.push(newMessage)
+
   }
 
   const getMessage = async () => {

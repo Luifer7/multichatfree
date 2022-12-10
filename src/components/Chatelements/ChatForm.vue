@@ -2,7 +2,7 @@
 <template>
     
             <form  class="formulario" v-on:submit.prevent="(addMessage(message, useData.currentUser, useData.userForChat), clear())" >
-            <input @keypress="press()" v-model="message" required type="text" class="form-control" placeholder="Escribe un mensaje">
+            <input  v-model="message" maxlength="100" required type="text" class="form-control" placeholder="Escribe un mensaje">
             </form>
             <i class="bi bi-send-plus send-icon" @click="(addMessage(message, useData.currentUser, useData.userForChat), clear())" ></i>
     
@@ -23,12 +23,6 @@ const clear = () => {
     message.value = ''
 }
 
-const uppp = () => {
- 
-}
-const press = () => {
-       
-}
 
 </script>
 

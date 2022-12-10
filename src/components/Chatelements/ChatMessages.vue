@@ -4,15 +4,24 @@
 <template>  
 
     <div class="messages" ref="itemRefs">
+
         <div v-for="message of getMess()" :key="message.id" 
-        :class="message.from === useData.currentUser?.id ?'message left':'message'">
-            <div class="d-flex align-items-start justify-content-between"
+        :class="message.from === useData.currentUser?.id ?'message left mb-2':'message mb-2'">
+
+            <div class="d-flex align-items-start  justify-content-between p-1"
             :class="message.from === useData.currentUser?.id ?'content-msg':''">
-                <img :src="message?.foto" width="35" height="35" style="object-fit: cover;" 
+
+                <img :src="message?.foto" width="35" height="35" 
+                style="object-fit: cover; border: 2px solid blue; border-radius: 50px;" 
                  class="rounded-circle" alt="">
-                <i class="content-message">{{message.content}}</i> 
+                <p class="content-message">{{message.content}} <br>
+                    <b class="text-dark time"  >{{message.time}}</b>
+                </p> 
+               
             </div>
+            
         </div>
+
     </div>
 
 </template>
@@ -58,22 +67,30 @@ const downScroll = () => {
 
 .message{
     padding: 5px; border-radius: 10px; 
-    width: 230px; margin-top: 10px; margin-left: 10px;
-    background-color: beige;
+    width: 300px; margin-top: 10px; margin-left: 10px;
+    background-color: rgb(231, 231, 209);
 }
 
 .left{
     margin-left: auto;
     margin-right: 10px;
-    background-color:rgb(21, 240, 167);
+    background-color:rgba(24, 148, 80, 0.788);
 }
 
 .content-message{
     font-size: .8em; margin: 5px;
+    word-wrap: break-word;
+    width: 240px;
+    font-weight: 500;
 }
 
 .content-msg{
     justify-content: space-around;
+}
+.time{
+    font-size: .8em;
+    letter-spacing: 1px;
+    font-weight: 900;
 }
 
 .content-msg img:nth-of-type(1) {
@@ -83,6 +100,20 @@ const downScroll = () => {
 .content-msg img:nth-of-type(2) {
     order: 2;
 }
+
+@media (max-width: 780px) {
+
+    .message{
+    width: 200px;
+    }
+
+    .content-message{
+        font-size: .7em; 
+        width: 130px;
+    }
+
+}
+
 
 
 </style>
