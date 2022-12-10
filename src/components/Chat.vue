@@ -8,7 +8,7 @@
     <div class="chat-into-box">
         
        
-        <div class="chat-user border d-flex align-items-center justify-content-between p-1"
+        <div v-if="useData.userForChat?.name"  class="chat-user border d-flex align-items-center justify-content-between p-1"
         @click="checkFavs(useData.userForChat)"
         >
 
@@ -20,7 +20,6 @@
                 <b v-if="useData.userForChat?.estado === 1" class="m-0 p-0 description text-success" ><i class="bi bi-circle-fill"></i></b>
                 <b v-if="useData.userForChat?.estado === 2" class="m-0 p-0 description text-danger" ><i class="bi bi-circle-fill"></i></b>
                 <b v-if="useData.userForChat?.estado === 3" class="m-0 p-0 description text-warning" ><i class="bi bi-circle-fill"></i></b>
-                
             </div>
 
              <div v-for="sss of useData.anoterFav" :key="sss.id" 
@@ -39,7 +38,7 @@
             <ChatMessages></ChatMessages>
         </div>
 
-        <div class="chat-send-msg" >
+        <div v-if="useData.userForChat?.name" class="chat-send-msg" >
             <ChatForm
             v-if="(useData.currentUser && useData.currentUser?.name)"
             ></ChatForm>

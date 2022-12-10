@@ -1,7 +1,7 @@
 
 
 import { useDataStore } from "../stores/data";
-import { collection, query, where, addDoc, getDocs, onSnapshot } from "firebase/firestore";
+import { collection, doc, query, where, deleteDoc, addDoc, getDocs, onSnapshot } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import Swal from 'sweetalert2'
 
@@ -83,7 +83,6 @@ export function useAmdin() {
   
   }
 
-
   const addFav = async (data) => {
   const docRef = await addDoc(collection(db, "fav"), {
       date: Date.now(),
@@ -99,13 +98,35 @@ export function useAmdin() {
     const querySnapshot = await getDocs(collection(db, "fav"))
     let fav = [] 
     querySnapshot.forEach((doc) => {
-     fav.push(doc.data())
+     fav.push(
+      {idDoc: doc.id,
+      ...doc.data()}
+     )
+    
     })
    useData.anoterFav = fav
    useData.anoterFav = useData.anoterFav.filter(field => field.from === useData.currentUser?.id )
+  
+  }
+  
+  const deleteFav = async (data) => {
+    Swal.fire({
+      title: `Quieres borrar a ${data.name} de tu lista de favoritos?`,
+      imageUrl: `${data.foto}`,
+      imageWidth: 200,
+      imageHeight: 200,
+      showCancelButton: true,
+      confirmButtonText: 'Si',
+    }).then((result) => {
+      if (result.isConfirmed) {
+         deleteDoc(doc(db, "fav", data.idDoc))
+         getFav()
+        Swal.fire(`${data.name} borrado de favortios`, '', 'success')
+      }
+    })
   }
 
   getFav()
 
-  return { addMessage, getUserToChat, addFav, getFav }
+  return { addMessage, getUserToChat, addFav, getFav, deleteFav }
 }

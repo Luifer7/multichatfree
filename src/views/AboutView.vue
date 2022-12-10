@@ -53,11 +53,11 @@
 
         <div class="d-flex p-2 flex-wrap mt-2 gap-2 align-items-center justify-content-center">
 
-              <button @click="ModalEditPhoto()" class="btn btn-sm btn-primary text-white fw-bold col-5">
+              <button @click="ModalEditPhoto()" class="btn btn-sm btn-primary text-white fw-bold">
                 Editar imagen <i class="bi bi-image"></i>
               </button>
               
-              <button @click="ModalEditUsername()" class="btn btn-sm btn-primary text-white fw-bold col-6">
+              <button @click="ModalEditUsername()" class="btn btn-sm btn-primary text-white fw-bold">
                 Editar Nombre <i class="bi bi-person-fill"></i>
               </button>
             

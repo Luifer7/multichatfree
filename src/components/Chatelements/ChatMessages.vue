@@ -74,7 +74,7 @@ const downScroll = () => {
 .left{
     margin-left: auto;
     margin-right: 10px;
-    background-color:rgba(24, 148, 80, 0.788);
+    background-color:rgba(35, 156, 90, 0.596);
 }
 
 .content-message{
