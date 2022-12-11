@@ -8,7 +8,9 @@ import { auth, db } from "../firebase";
 import Swal from 'sweetalert2'
 import { useFormat } from "./FormatDay";
 import { useRouter } from "vue-router";
-import { async } from "@firebase/util";
+import { id } from "date-fns/locale";
+
+
 
 export function useAuth() {
 
@@ -29,6 +31,7 @@ export function useAuth() {
             showConfirmButton: false,
             timer: 1500
           })
+          changeEstatus(1)
         }
         })
         .catch((error) => {
@@ -52,10 +55,21 @@ export function useAuth() {
        await signOut(auth).then(() => {
            useData.currentUser = null
            router.push('/')
+           changeEstatus(2)
           }).catch((error) => {
           
-          });
+          })
+        
     }
+
+    const changeEstatus = async (estado) => {
+      let id = useData.idDocCurrentUser[0]?.id
+      const currentUserRef = doc(db, "usuarios", id);
+      await updateDoc(currentUserRef, {
+        estado: estado
+      })
+    }
+
 
 
     //Actualiza y crea el usuario
@@ -86,8 +100,6 @@ export function useAuth() {
 
     }
 
-
-    
     // Observer alternativo
     const anotherObserver =  () => {
 

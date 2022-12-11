@@ -83,6 +83,10 @@ export function useAmdin() {
   
   }
 
+
+
+  // FAVORITOS
+
   const addFav = async (data) => {
   const docRef = await addDoc(collection(db, "fav"), {
       date: Date.now(),

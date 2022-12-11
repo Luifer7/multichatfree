@@ -6,62 +6,62 @@
 
       <div class="w-100" v-if="useData.currentUser?.name" >
        
-        <h2 class="text-center mt-3 fw-bold text-uppercase" >
-          {{useData.currentUser?.name}} <i class="bi bi-person-vcard"></i>
-        </h2>
+          <h2 class="text-center mt-2 fw-bold text-uppercase" >
+            {{useData.currentUser?.name}} <i class="bi bi-person-vcard"></i>
+          </h2>
 
-        <div class="card p-3" >
-                     
-            <div class="d-flex flex-wrap" >
-              
-              <div class="bg-transparent rounded" style="height: 200px; width: 300px;" >
-                <img :src="useData.currentUser?.foto"
-                    class="" style="width: 100%; height: 100%; object-fit: contain; " alt="">
+          <div class="card p-1" >
+                      
+              <div class="d-flex flex-wrap" >
+                
+                <div class="bg-transparent rounded" style="height: 200px; width: 300px;" >
+                  <img :src="useData.currentUser?.foto"
+                      class="" style="width: 100%; height: 100%; object-fit: contain; " alt="">
+                </div>
+
+                <div class="p-1 m-1 texto-info" >
+
+                  <strong>Email: 
+                  <b class="text-primary" >{{useData.currentUser?.email}}</b>
+                  </strong> <br>
+
+                  <strong>Username: 
+                  <b class="text-primary" >{{useData.currentUser?.name}}</b> <br>
+                  </strong>
+
+                    <div class="mt-2 p-2" >
+
+                    <b> Cuenta creada el</b> <br>
+                      <strong> 
+                      <b class="text-primary" >{{useData?.alternativeData?.createdTime}}</b> <br>
+                      <small class="text-primary" >({{useData.alternativeData.created}})</small> <br>
+                      </strong> 
+                      <br>
+                      <b>Ultimo inicio de sesión</b> <br>
+                      <strong> 
+                      <b class="text-primary" >{{useData?.alternativeData?.lastLoginAt}}</b> <br>
+                      </strong>
+
+
+                    </div>
+
+                </div>
+
               </div>
 
-              <div class="p-1 m-1 texto-info" >
+              <div class="d-flex p-2 flex-wrap gap-2 align-items-center justify-content-start">
 
-                <strong>Email: 
-                <b class="text-primary" >{{useData.currentUser?.email}}</b>
-                </strong> <br>
+                <button @click="ModalEditPhoto()" class="btn btn-sm btn-primary text-white fw-bold">
+                  Editar imagen <i class="bi bi-image"></i>
+                </button>
 
-                <strong>Username: 
-                <b class="text-primary" >{{useData.currentUser?.name}}</b> <br>
-                </strong>
-
-                  <div class="mt-2 p-2" >
-
-                  <b> Cuenta creada el</b> <br>
-                    <strong> 
-                    <b class="text-primary" >{{useData?.alternativeData?.createdTime}}</b> <br>
-                    <small class="text-primary" >({{useData.alternativeData.created}})</small> <br>
-                    </strong> 
-                    <br>
-                    <b>Ultimo inicio de sesión</b> <br>
-                    <strong> 
-                    <b class="text-primary" >{{useData?.alternativeData?.lastLoginAt}}</b> <br>
-                    </strong>
-
-
-                  </div>
+                <button @click="ModalEditUsername()" class="btn btn-sm btn-primary text-white fw-bold">
+                  Editar Nombre <i class="bi bi-person-fill"></i>
+                </button>
 
               </div>
-
-            </div>
-     
-        </div>
-
-        <div class="d-flex p-2 flex-wrap mt-2 gap-2 align-items-center justify-content-center">
-
-              <button @click="ModalEditPhoto()" class="btn btn-sm btn-primary text-white fw-bold">
-                Editar imagen <i class="bi bi-image"></i>
-              </button>
-              
-              <button @click="ModalEditUsername()" class="btn btn-sm btn-primary text-white fw-bold">
-                Editar Nombre <i class="bi bi-person-fill"></i>
-              </button>
-            
-            </div>
+      
+          </div>
 
       </div>
 
