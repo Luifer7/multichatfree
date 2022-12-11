@@ -1,9 +1,10 @@
 
 
 import { useDataStore } from "../stores/data";
-import { collection, doc, query, where, deleteDoc, addDoc, getDocs, onSnapshot } from "firebase/firestore";
+import { collection, doc, query, deleteDoc, addDoc, getDocs, onSnapshot } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import Swal from 'sweetalert2'
+import { id } from "date-fns/locale";
 
 export function useAmdin() {
 
@@ -72,15 +73,14 @@ export function useAmdin() {
      currentCompare = currentCompare.filter(field => field.id === useData.currentUser.id)
      useData.users = useData.users.filter(field => field.id != useData.currentUser.id)
      idCurrentUser = idCurrentUser.filter(field => field.id === currentCompare[0]?.idDocument )
-     useData.idDocCurrentUser = idCurrentUser
-
+     useData.idDocCurrentUser = idCurrentUser[0].id
   }
 
   getUser()
 
   const getUserToChat = (user) => {
     useData.userForChat = user
-  
+   
   }
 
 

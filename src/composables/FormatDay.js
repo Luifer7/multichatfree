@@ -84,7 +84,7 @@ export function useFormat() {
         photoURL: url
     }).then(() => {
 
-        const updatePhotoRef = doc(db, "usuarios", useData.idDocCurrentUser[0]?.id);
+        const updatePhotoRef = doc(db, "usuarios", useData.idDocCurrentUser);
         updateDoc(updatePhotoRef, {
             foto: url
         })
@@ -109,8 +109,7 @@ export function useFormat() {
        
 
     }).catch((error) => {console.log(error)})  
-}
-
+    }
 
 
     // MODAL EDITAR USERNAME
@@ -167,7 +166,7 @@ export function useFormat() {
         displayName: newname.toUpperCase()
     }).then(() => {
 
-        const updatePhotoRef = doc(db, "usuarios", useData.idDocCurrentUser[0]?.id);
+        const updatePhotoRef = doc(db, "usuarios", useData.idDocCurrentUser);
         updateDoc(updatePhotoRef, {
             name: newname.toUpperCase()
         })

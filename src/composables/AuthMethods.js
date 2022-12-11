@@ -31,7 +31,6 @@ export function useAuth() {
             showConfirmButton: false,
             timer: 1500
           })
-          changeEstatus(1)
         }
         })
         .catch((error) => {
@@ -46,7 +45,7 @@ export function useAuth() {
                 `</b class="text-warning"> ${errorMessage} </b>`,
                 icon: 'error',
                 confirmButtonText: 'Ok'
-              })
+              })  
             }
         })
     }
@@ -55,7 +54,6 @@ export function useAuth() {
        await signOut(auth).then(() => {
            useData.currentUser = null
            router.push('/')
-           changeEstatus(2)
           }).catch((error) => {
           
           })
@@ -63,7 +61,7 @@ export function useAuth() {
     }
 
     const changeEstatus = async (estado) => {
-      let id = useData.idDocCurrentUser[0]?.id
+      //let id =  useData.idDocCurrentUser[0]?.id
       const currentUserRef = doc(db, "usuarios", id);
       await updateDoc(currentUserRef, {
         estado: estado
