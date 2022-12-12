@@ -3,57 +3,64 @@
 
 <template>
 
-  <div class="box-chat" v-if="useData.isLogin" >
-    
-    <div class="users">
-      <Users></Users>
-    </div>
-    
-    <div class="chats">
-      <chat></chat>
-    </div>
-
-    <div class="users-movil" >
-      <UsersMovil></UsersMovil>
-    </div>
-
-  </div>
-
-
-        <!-- LOGIN -->
-      <div class="login" v-if="!useData.isLogin" >
+    <transition name="vistas" mode="out-in" >
+      <div class="box-chat" v-if="useData.isLogin" >
         
-          <form v-on:submit.prevent="userLogin(email, password)" class="p-2 form-login p-3" 
-          style="height: 70%;">
-
-            <h3 class="text-center mb-3" >Iniciar sesion</h3>
-            <div class="mb-3">
-              <input v-model="email" required type="text" class="form-control form-control-sm" placeholder="email" >
-            </div>
-            <div class="mb-3">
-              <input v-model="password" required type="text" class="form-control form-control-sm" placeholder="password" >
-            </div>
-            <div class="mb-3" >
-              <button   type="submit" class="btn btn-success btn-sm w-100 fw-bold">
-                <span v-if="useData.spinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  Iniciar sesion
-              </button>
-            </div>
+        
+        <div class="users">
+          <transition name="vistas" mode="out-in" >
+          <Users></Users>
+          </transition>
+        </div>
+        
+        <div class="chats">
           
-          </form>
+          <chat></chat>
 
-          <div class="text-center mt-1 card-footer" data-bs-toggle="modal" data-bs-target="#registerUser" >
-            <div class="mt-1" >
-              No tienes cuenta?
-              <div class="w-100" >
-                <button class="btn btn-sm btn-primary w-100" >
-                Registrate
-              </button>
-              </div>
-            </div>
-            </div>
+        </div>
+
+        <div class="users-movil" >
+          <UsersMovil></UsersMovil>
+        </div>
 
       </div>
+    </transition>
+
+        <!-- LOGIN -->
+   
+          <div class="login" v-if="!useData.isLogin" >
+            
+              <form v-on:submit.prevent="userLogin(email, password)" class="p-2 form-login p-3" 
+              style="height: 70%;">
+
+                <h3 class="text-center mb-3" >Iniciar sesion</h3>
+                <div class="mb-3">
+                  <input v-model="email" required type="text" class="form-control form-control-sm" placeholder="email" >
+                </div>
+                <div class="mb-3">
+                  <input v-model="password" required type="text" class="form-control form-control-sm" placeholder="password" >
+                </div>
+                <div class="mb-3" >
+                  <button   type="submit" class="btn btn-success btn-sm w-100 fw-bold">
+                    <span v-if="useData.spinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      Iniciar sesion
+                  </button>
+                </div>
+              
+              </form>
+
+              <div class="text-center mt-1 card-footer" data-bs-toggle="modal" data-bs-target="#registerUser" >
+                <div class="mt-1" >
+                  No tienes cuenta?
+                  <div class="w-100" >
+                    <button class="btn btn-sm btn-primary w-100" >
+                    Registrate
+                  </button>
+                  </div>
+                </div>
+                </div>
+
+          </div>
 
 
   
@@ -155,6 +162,27 @@ border: 1px solid #efeff5;
   width: 15%;
   display: none;
 }
+
+/*/// TTTT ////*/
+
+.vistas-enter-from {
+  opacity: 0;
+  transform: translateX(100px);
+}
+
+.vistas-enter-active {
+  transition: all 0.2s ease-out;
+}
+
+.vistas-leave-to {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+.vistas-leave-active {
+  transition: all 0.2s ease-in;
+}
+
+
 
 
 @media (max-width: 780px) {

@@ -23,6 +23,9 @@ export const useDataStore = defineStore('data', () => {
   const spinner = ref(null)
 
 
+  const fechaActual = ref({})
+
+
   return { userForChat, messages, currentUser, idDocCurrentUser, users, isLogin, spinner,
-           alternativeData, anoterFav, noFav, estado }
+           alternativeData, anoterFav, noFav, estado, fechaActual }
 })

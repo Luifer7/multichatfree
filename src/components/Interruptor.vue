@@ -25,69 +25,81 @@ const checked = ref(null)
 const yo = ref(null)
 const currentId = ref('')
 
-onUpdated(() => {
-    if (checked.value) {
-        Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Estas en linea',
+    onUpdated(() => {
+
+        const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
         showConfirmButton: false,
-        timer: 1000
+        timer: 2100,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
         })
-        const washingtonRef = doc(db, "usuarios", currentId.value);
-        updateDoc(washingtonRef, {
-        estado: 1
-        })
-    }
-    if (!checked.value) {
-        Swal.fire({
-        position: 'top-end',
-        icon: 'warning',
-        title: 'No estas en linea',
-        showConfirmButton: false,
-        timer: 1000
-        })
-        const washingtonRef = doc(db, "usuarios", currentId.value);
-        updateDoc(washingtonRef, {
-        estado: 2
-        })
-       
-    }
-})
-
-const getCurrentUser = async () => {
-    
-   if (useData.currentUser?.id) {
-    const q = query(collection(db, "usuarios"), where("id", "==", useData.currentUser?.id));
-    const querySnapshot = await getDocs(q);
-    let c = []
-    querySnapshot.forEach((doc) => {
-        c.push({id: doc.id, ...doc.data()})
-    })  
-        yo.value = c[0]
-        currentId.value = c[0].idDocument
-        useData.estado = c[0].estado
-
-           if (!checked.value) {
-                if (useData.estado === 1) {
-                    checked.value = true   
-                }
-                if (useData.estado === 2) {
-                    checked.value = false   
-                }
-           }
-           if (checked.value) {
-              console.log("TUDO BEN")
-           }
-    }
-
-        function saludos(){
-          getCurrentUser()
+            
+        if (checked.value) { 
+            
+            Toast.fire({
+            icon: 'success',
+            title: 'Estás en linea!'
+            })
+           
+            const washingtonRef = doc(db, "usuarios", currentId.value);
+            updateDoc(washingtonRef, {
+            estado: 1
+            })
         }
 
-        setTimeout(saludos, 4000);
+        if (!checked.value) {
+            Toast.fire({
+            icon: 'warning',
+            title: 'No estás en linea!'
+            })
+            const washingtonRef = doc(db, "usuarios", currentId.value);
+            updateDoc(washingtonRef, {
+            estado: 2
+            })
+        
+        }
 
-}
+    })
+
+    const getCurrentUser = async () => {
+        
+    if (useData.currentUser?.id) {
+        const q = query(collection(db, "usuarios"), where("id", "==", useData.currentUser?.id));
+        const querySnapshot = await getDocs(q);
+        let c = []
+        querySnapshot.forEach((doc) => {
+            c.push({id: doc.id, ...doc.data()})
+        })  
+            yo.value = c[0]
+            currentId.value = c[0].idDocument
+            useData.estado = c[0].estado
+
+            if (!checked.value) {
+                    if (useData.estado === 1) {
+                        checked.value = true   
+                    }
+                    if (useData.estado === 2) {
+                        checked.value = false   
+                    }
+            }
+            if (checked.value) {
+                
+            }
+        }
+
+            function saludos(){
+            getCurrentUser()
+            }
+
+            setTimeout(saludos, 4000);
+
+
+    }
 
 getCurrentUser()
 

@@ -11,32 +11,44 @@
                     :src="useData.currentUser?.foto"
                     width="35"
                     height="35"
-                    style="object-fit: cover"
+                    style="object-fit: cover; cursor: pointer;"
                     class="rounded-circle dropdown-toggle"
                     data-bs-toggle="dropdown" aria-expanded="false"
                     alt=""
+                    @click="getDateNow()"
                 />
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li class="dropdown-item fw-bold">
+                        {{useData.currentUser.name}}
+                    </li>
+                    <li class="dropdown-item text-muted">
+                        {{useData.currentUser.email}}
+                    </li>
+                    <li class="dropdown-item fw-bold h5">
+                       {{useData.fechaActual.nombredia}} <br>
+                      <small style="font-size: .7em;" > {{useData.fechaActual.diamesnumero}} de {{useData.fechaActual.nombremes}}</small> <br>
+                      <div  style="font-size: .7em;" >{{useData.fechaActual.year}} <i class="bi bi-calendar"></i> </div>
+                    </li>
+                    <li class="dropdown-item fw-bold text-muted text-center">
+                        {{useData.fechaActual.hora}}
+                        <i class="bi bi-watch"></i>
+                    </li>
+                    
+                        <div v-if="useData.isLogin" class="w-100 m-auto">
+                            <form v-on:submit.prevent="cerrar()" class="d-flex align-items-center justify-content-center" >
+                                <button class="cerrarcerrar">
+                                  <b class="h6" >SALIR</b> <i class="bi bi-box-arrow-in-right h2 closeclose text-danger"></i>
+                                </button>
+                            </form>
+                        </div>
+                  
                 </ul>
                
                 </div>
 
-                <div v-if="useData.isLogin" class="container lognin">
-                <form v-on:submit.prevent="cerrar()">
-                    <button class="cerrarcerrar">
-                        <i class="bi bi-box-arrow-in-right h1 closeclose text-danger"></i>
-                    </button>
-                </form>
-                </div>
-
-                <div
-                v-if="useData.currentUser && !useData.currentUser?.name"
-                class="d-flex align-items-center justify-content-center m-1"
-                >
               
-                </div>
 
+               
             </div>
 
 
@@ -47,9 +59,11 @@ import { ref } from "@vue/reactivity";
 import { useAuth } from "../composables/AuthMethods";
 import { useDataStore } from "../stores/data";
 import Swal from "sweetalert2";
+import { useFormat } from "../composables/FormatDay";
 
 const useData = useDataStore();
 const { editUser, userLogout } = useAuth();
+const { getDateNow } = useFormat()
 
 
 const cerrar = () => {
@@ -85,6 +99,7 @@ const cerrar = () => {
 border: none;
 background: transparent;
 outline: none;
+display: flex; align-items: center; justify-content: center;
 }
 
 .closeclose{

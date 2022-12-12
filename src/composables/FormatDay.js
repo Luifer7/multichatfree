@@ -8,13 +8,12 @@ import Swal from 'sweetalert2'
 import { auth, db } from "../firebase";
 import { updateProfile, onAuthStateChanged } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
+import  getDay  from "date-fns/getDate";
 
 export function useFormat() {
 
     const useData = useDataStore()
    
-
-    
     const formatCurrentUser = async (data) => {
 
         const justNow = new Date()
@@ -192,7 +191,98 @@ export function useFormat() {
 }
 
 
+    const getDateNow = () => {
+
+        let current = new Date()
+        useData.fechaActual = {}
+
+        let diaNumero = current.getDay()
+        let diaNombre = ""
+        let diaMesNumero = current.getDate()
+        let numeroMes = current.getMonth() + 1
+        let nombreMes = ''
+        let year = current.getFullYear()
+
+        let hora = current.getHours().toString()
+        let minuto = current.getMinutes().toString()
+
+        switch (diaNumero) {
+            case 0:
+              diaNombre = "Domingo";
+              break;
+            case 1:
+              diaNombre = "Lunes";
+              break;
+            case 2:
+               diaNombre = "Martes";
+              break;
+            case 3:
+              diaNombre = "Miercoles";
+              break;
+            case 4:
+              diaNombre = "Jueves";
+              break;
+            case 5:
+              diaNombre = "Viernes";
+              break;
+            case 6:
+              diaNombre = "Sabado";
+          }
+
+        switch (numeroMes) {
+            case 1:
+              nombreMes = "Enero";
+              break;
+            case 2:
+              nombreMes = "Febrero";
+              break;
+            case 3:
+               nombreMes = "Marzo";
+              break;
+            case 4:
+              nombreMes = "Abril";
+              break;
+            case 5:
+              nombreMes = "Mayo";
+              break;
+            case 6:
+              nombreMes = "Junio";
+              break;
+            case 7:
+              nombreMes = "Julio";
+              break;
+              case 8:
+               nombreMes = "Agosto";
+              break;
+            case 9:
+              nombreMes = "Septiembre";
+              break;
+            case 10:
+              nombreMes = "Octubre";
+              break;
+            case 11:
+              nombreMes = "Noviembre";
+              break;
+            case 12:
+              nombreMes = "Diciembre";
+          }
+         
+          if (minuto.length === 1) {
+              minuto = `0${minuto}`
+          }
+          
+
+        useData.fechaActual = {
+            nombredia: diaNombre, diamesnumero: diaMesNumero, 
+            nombremes: nombreMes, year: year, hora: `${hora}:${minuto}`
+        }  
+        
+    }
+
+    getDateNow()
+
+
     return {
-        formatCurrentUser, ModalEditPhoto, ModalEditUsername
+        formatCurrentUser, ModalEditPhoto, ModalEditUsername, getDateNow
     }
 }

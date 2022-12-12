@@ -12,14 +12,15 @@
 
           <div class="card p-1" >
                       
-              <div class="d-flex flex-wrap" >
+              <div class="d-flex flex-wrap p-2" >
                 
-                <div class="bg-transparent rounded" style="height: 200px; width: 300px;" >
+                <div class="bg-transparent rounded" style="height: 200px; width: 250px;" >
                   <img :src="useData.currentUser?.foto"
-                      class="" style="width: 100%; height: 100%; object-fit: contain; " alt="">
+                      class="img-thumbnail m-2" 
+                      style="width: 100%; height: 100%; object-fit: cover; object-position: center; " alt="">
                 </div>
 
-                <div class="p-1 m-1 texto-info" >
+                <div class="p-2 m-2 texto-info" >
 
                   <strong>Email: 
                   <b class="text-primary" >{{useData.currentUser?.email}}</b>
@@ -29,7 +30,7 @@
                   <b class="text-primary" >{{useData.currentUser?.name}}</b> <br>
                   </strong>
 
-                    <div class="mt-2 p-2" >
+                    <div class="mt-2" >
 
                     <b> Cuenta creada el</b> <br>
                       <strong> 
@@ -49,7 +50,7 @@
 
               </div>
 
-              <div class="d-flex p-2 flex-wrap gap-2 align-items-center justify-content-start">
+              <div class="d-flex p-2 flex-wrap gap-2 align-items-center justify-content-center">
 
                 <button @click="ModalEditPhoto()" class="btn btn-sm btn-primary text-white fw-bold">
                   Editar imagen <i class="bi bi-image"></i>
