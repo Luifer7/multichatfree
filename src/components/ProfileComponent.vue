@@ -2,20 +2,23 @@
 
 
             <div v-if="useData.currentUser"
-                class="box-profile d-flex p-2 gap-2 align-items-center justify-content-center m-2 rounded">
+                class="box-profile   d-flex p-2 gap-2 align-items-center justify-content-center m-2 rounded">
 
-                <div class="d-flex  gap-1 align-items-end">
-                    <small style="font-size: 0.7em; font-weight: bold">{{
-                    useData.currentUser?.name
-                }}</small>
+                <div class="d-flex  gap-1 align-items-end dropstart">
+                    <i v-if="useData.estado === 1" class="bi bi-circle-fill text-success" style="font-size: .7em;" ></i>
+                    <i v-if="useData.estado === 2" class="bi bi-circle-fill text-danger" style="font-size: .7em;" ></i>
                 <img
                     :src="useData.currentUser?.foto"
                     width="35"
                     height="35"
                     style="object-fit: cover"
-                    class="rounded-circle"
+                    class="rounded-circle dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false"
                     alt=""
                 />
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                </ul>
                
                 </div>
 

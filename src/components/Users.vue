@@ -11,12 +11,12 @@
         <div class="users-persons">
 
             <div v-for="user of searchPerson()" :key="user.id" @click="getUserToChat(user)"
-            class="user m-2 p-2 rounded d-flex align-items-center justify-content-between"
+            class="user m-1 p-2 rounded d-flex align-items-center justify-content-between"
             :class="(useData.userForChat?.id === user.id ?'seleccionado':'')"
             >
 
-                <div class="d-flex align-items-center gap-1 img-box-responsive" >
-
+                <div class="d-flex  align-items-center gap-1 img-box-responsive" >
+                
                     <img width="30" height="30" style="object-fit: cover;" class="rounded-circle" 
                     :src="user?.foto" alt="" >
                     <div class="user-name d-flex flex-column" >

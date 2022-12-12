@@ -8,7 +8,7 @@ import { auth, db } from "../firebase";
 import Swal from 'sweetalert2'
 import { useFormat } from "./FormatDay";
 import { useRouter } from "vue-router";
-import { id } from "date-fns/locale";
+
 
 
 
@@ -60,13 +60,6 @@ export function useAuth() {
         
     }
 
-    const changeEstatus = async (estado) => {
-      //let id =  useData.idDocCurrentUser[0]?.id
-      const currentUserRef = doc(db, "usuarios", id);
-      await updateDoc(currentUserRef, {
-        estado: estado
-      })
-    }
 
 
 

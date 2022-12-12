@@ -5,7 +5,7 @@
             <i class="bi bi-send-plus send-icon" @click="(addMessage(message, useData.currentUser, useData.userForChat), clear())" ></i>
             <form  class="formulario" v-on:submit.prevent="(addMessage(message, useData.currentUser, useData.userForChat), clear())" >
                 <input  v-model="message" maxlength="100" required type="text" 
-                class="form-control ddd" placeholder="Escribe un mensaje">
+                class="form-control input-formulario" placeholder="Escribe un mensaje">
             </form>
 
 </template>
@@ -30,7 +30,7 @@ const clear = () => {
 <style scoped>
 
 .formulario {
-    width: 80%; height: 50%;
+    width: 90%; height: 50%;
     background-color: #e9eaf1;
     border-color: #e9eaf1;
     color: #454b5c;
@@ -39,9 +39,10 @@ const clear = () => {
 .send-icon{
     transition: .6s ease all;
     margin-right: 10px;
-    font-size: 35px;
+    font-size: 30px;
     cursor: pointer;
     transition: .6s ease all;
+    display: none;
 }
 .send-icon:hover {
     color: rgb(34, 93, 170);
@@ -52,8 +53,18 @@ const clear = () => {
     transform: scale(1);
 }
 
-.ddd {
+.input-formulario {
     height: 100%;
 }
+
+@media (max-width: 780px) {
+    .formulario {
+    width: 75%;
+    }
+    .send-icon {
+        display: block;
+    }
+
+ }
 
 </style>

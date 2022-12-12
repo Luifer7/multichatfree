@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
+import Interruptor from "./components/Interruptor.vue";
 import ProfileComponent from "./components/ProfileComponent.vue";
 import setthings from "./components/Setthings.vue";
 import { useDataStore } from "./stores/data";
@@ -8,8 +9,11 @@ const useData = useDataStore()
 
 <template>
 
-  <div class="box-nav d-flex align-items-center justify-content-between">
-    <span class="fw-bold text-dark m-2 h4">MultichatFree</span>
+  <div class="box-nav flex-wrap d-flex align-items-center justify-content-between">
+
+    <span class="fw-bold text-muted m-2" style="cursor: pointer;">multichatfree</span>
+    
+    <Interruptor></Interruptor>
     
     <ProfileComponent></ProfileComponent>
   
