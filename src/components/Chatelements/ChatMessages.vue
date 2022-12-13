@@ -104,12 +104,12 @@ const downScroll = () => {
 @media (max-width: 780px) {
 
     .message{
-    width: 200px;
+    width: 190px;
     }
 
     .content-message{
         font-size: .7em; 
-        width: 130px;
+        width: 120px;
     }
 
 }

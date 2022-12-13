@@ -43,7 +43,7 @@ const useData = useDataStore()
 
 
 .box-nav {
-  height: 11vh;
+  height: 9vh;
   background-color: #ffff;
   border-bottom: 2px solid #efeff5;
 }
@@ -53,7 +53,7 @@ const useData = useDataStore()
 }
 
 .infoo{
-  font-size: .6Sem;
+  font-size: .6em;
 }
 
 /*///////////   //////////// */

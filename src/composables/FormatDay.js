@@ -14,6 +14,7 @@ import { useAmdin } from "./ChatMethods";
 export function useFormat() {
 
     const useData = useDataStore()
+    const { getFav } = useAmdin()
 
    
     const formatCurrentUser = async (data) => {
@@ -230,6 +231,15 @@ export function useFormat() {
      
     }
 
+    //edit favs
+    const editFav = async (fav, u) => {
+      const updatePhotoRef = await doc(db, "fav", fav.idDoc);
+      updateDoc(updatePhotoRef, {
+          name: u.name, foto: u.foto
+      })
+      await getFav()
+    }
+
     const getRenewData = async () => {
         const querySnapshot = await getDocs(collection(db, "usuarios"))
         let usuarios = [] 
@@ -335,6 +345,6 @@ export function useFormat() {
 
 
     return {
-        formatCurrentUser, ModalEditPhoto, ModalEditUsername, getDateNow, ModalEditFuente
+        formatCurrentUser, ModalEditPhoto, ModalEditUsername, getDateNow, ModalEditFuente, editFav
     }
 }
