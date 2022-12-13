@@ -7,12 +7,14 @@ import formatDistance from "date-fns/formatDistance";
 import Swal from 'sweetalert2'
 import { auth, db } from "../firebase";
 import { updateProfile, onAuthStateChanged } from "firebase/auth";
-import { doc, updateDoc } from "firebase/firestore";
+import { collection, updateDoc, doc, query, deleteDoc, addDoc, getDocs, onSnapshot } from "firebase/firestore";
 import  getDay  from "date-fns/getDate";
+import { useAmdin } from "./ChatMethods";
 
 export function useFormat() {
 
     const useData = useDataStore()
+
    
     const formatCurrentUser = async (data) => {
 
@@ -105,8 +107,6 @@ export function useFormat() {
     
           })
 
-       
-
     }).catch((error) => {console.log(error)})  
     }
 
@@ -188,7 +188,59 @@ export function useFormat() {
           })
 
     }).catch((error) => {console.log(error)})  
-}
+    }
+
+     // MODAL EDITAR FUENTE
+     const ModalEditFuente = async  (fuente) => {
+      
+      if (fuente === '' || fuente === 'Escoge una fuente') {
+        return  Swal.fire({
+          icon: "error", text: "Debes escoger una de las opciones!"
+        })
+      }
+
+      Swal.fire({
+        html: `Has elegido <b class="text-success" >${fuente}</b>`,
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        },
+        showCancelButton: true, cancelButtonColor: '#d33'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const updatePhotoRef = doc(db, "usuarios", useData.idDocCurrentUser);
+          updateDoc(updatePhotoRef, {
+              fuente: fuente
+          })
+          getRenewData()
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Tu fuente ha sido modificada',
+              showConfirmButton: false,
+              timer: 1500
+            })
+           
+        } 
+    
+      })
+
+     
+    }
+
+    const getRenewData = async () => {
+        const querySnapshot = await getDocs(collection(db, "usuarios"))
+        let usuarios = [] 
+        let currentCompare = []
+        querySnapshot.forEach((doc) => {
+           usuarios.push(doc.data())
+        })
+        currentCompare = usuarios
+         currentCompare = currentCompare.filter(field => field.id === useData.currentUser?.id)
+         useData.fuente = currentCompare[0].fuente
+    }
 
 
     const getDateNow = () => {
@@ -283,6 +335,6 @@ export function useFormat() {
 
 
     return {
-        formatCurrentUser, ModalEditPhoto, ModalEditUsername, getDateNow
+        formatCurrentUser, ModalEditPhoto, ModalEditUsername, getDateNow, ModalEditFuente
     }
 }

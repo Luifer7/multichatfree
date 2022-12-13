@@ -75,7 +75,7 @@ export function useAuth() {
           id: user.uid, token: user.refreshToken, email: user.email, name: username, 
           foto: "https://cutewallpaper.org/24/profile-icon-png/png-file-profile-icon-vector-png-transparent-png-980x980-free-download-on-nicepng.png",
           estado: 1,
-          idDocument: 'nn'
+          idDocument: 'nn', fuente: ''
         }).then((result) => {
             //Actualizo el user de una
             const currentUserRef = doc(db, "usuarios", result.id);

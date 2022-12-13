@@ -11,9 +11,11 @@ const useData = useDataStore()
 
 <template>
 
-  <div class="box-nav box-success flex-wrap d-flex align-items-center justify-content-between">
+  <div class="box-nav box-success flex-wrap d-flex align-items-center justify-content-between"
+  :class="useData?.fuente"
+  >
 
-    <span class="fw-bold text-muted m-2" style="cursor: pointer;">multichatfree</span>
+    <span class="fw-bold text-dark m-2" style="cursor: pointer;">multichatfree</span>
     
     <Interruptor v-if="useData.isLogin" ></Interruptor>
     
@@ -21,7 +23,9 @@ const useData = useDataStore()
   
   </div>
 
-  <div class="box-all d-flex">
+  <div class="box-all d-flex"
+  :class="useData?.fuente"
+  >
     <setthings></setthings>
 
     <RouterView />
@@ -33,18 +37,42 @@ const useData = useDataStore()
 
 
 
-<style scoped>
+<style scoped >
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Oswald&family=Roboto&family=Secular+One&display=swap');
+
+
 .box-nav {
   height: 11vh;
   background-color: #ffff;
   border-bottom: 2px solid #efeff5;
 }
+
 .box-all {
   height: 89vh;
 }
 
 .infoo{
   font-size: .6Sem;
+}
+
+/*///////////   //////////// */
+       
+.Caveat{
+  font-family: 'Caveat', cursive;
+  font-size: 1.2em;
+}
+.Oswald {
+  font-family: 'Oswald', sans-serif;  
+  font-size: 1em;
+}
+.Roboto{
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+}
+.SecularOne{
+  font-family: 'Secular One', sans-serif;
+  font-size: 1em;
 }
 
 /* ////////////  //////////// */

@@ -6,10 +6,14 @@ import { defineStore } from 'pinia'
 export const useDataStore = defineStore('data', () => {
 
   const users = ref([])
-
   const currentUser = ref(null)
+  
+  // MI ID
   const idDocCurrentUser = ref(null)
+  const fuente = ref(null)
   const alternativeData = ref(null)
+
+  //Fav
   const anoterFav = ref([])
   const noFav = ref([])
 
@@ -27,5 +31,5 @@ export const useDataStore = defineStore('data', () => {
 
 
   return { userForChat, messages, currentUser, idDocCurrentUser, users, isLogin, spinner,
-           alternativeData, anoterFav, noFav, estado, fechaActual }
+           alternativeData, anoterFav, noFav, estado, fechaActual, fuente }
 })
