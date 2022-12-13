@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useDataStore } from '../stores/data'
 import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
@@ -12,20 +13,46 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
+      component: () => import('../views/AboutView.vue'),
+      meta: {
+        auth: true,
+      }
     },
     {
       path: '/fav',
       name: 'fav',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/FavView.vue')
+      component: () => import('../views/FavView.vue'),
+      meta: {
+        auth: true,
+      }
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: () => import('../views/SettingsView.vue'),
+      meta: {
+        auth: true,
+      }
     }
   ]
 })
+
+
+router.beforeEach((to, from, next) => {
+  
+  const requiredAuth = to.meta.auth
+  const useData = useDataStore()
+
+  if (requiredAuth) {
+
+    if (useData.isLogin) {
+      return next()
+    } 
+    return next('/')
+  }
+
+   next()
+})
+
 
 export default router

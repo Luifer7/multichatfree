@@ -4,6 +4,7 @@
 <template>
 
     <transition name="vistas" mode="out-in" >
+
       <div class="box-chat" v-if="useData.isLogin" >
         
         
@@ -24,6 +25,7 @@
         </div>
 
       </div>
+      
     </transition>
 
         <!-- LOGIN -->

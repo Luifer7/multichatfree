@@ -26,8 +26,13 @@
                     <i class="bi bi-star-fill h2"></i>
                 </RouterLink>  
             </strong>
-        
-        
+
+            <strong v-if="item.color === 44" >
+                <RouterLink to="/settings" >
+                     <i class="bi bi-gear-fill h2"></i>
+                </RouterLink>  
+            </strong>
+
         </span>
     
     </div>
@@ -40,7 +45,8 @@ import { ref } from "vue";
 const settingsIcons = ref([ 
     {id: 2, action: "grupos", color: 33},
     {id: 1, action: "people", color: 11},
-    {id: 3, action: "perfil", color: 22}
+    {id: 3, action: "perfil", color: 22},
+    {id: 4, action: "settings", color: 44}
 ])
 
 </script>

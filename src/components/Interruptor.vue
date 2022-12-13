@@ -15,10 +15,12 @@ import {  collection, query, where, getDocs , doc, updateDoc} from "@firebase/fi
 import { ref } from "@vue/reactivity";
 import { onUpdated } from "@vue/runtime-core";
 import Swal from 'sweetalert2'
+import { useAmdin } from "../composables/ChatMethods";
 import { db } from "../firebase";
 import { useDataStore } from "../stores/data";
 
 const useData = useDataStore()
+
 
 const checked = ref(null)
 
@@ -50,6 +52,7 @@ const currentId = ref('')
             updateDoc(washingtonRef, {
             estado: 1
             })
+          
         }
 
         if (!checked.value) {
@@ -61,7 +64,7 @@ const currentId = ref('')
             updateDoc(washingtonRef, {
             estado: 2
             })
-        
+            
         }
 
     })

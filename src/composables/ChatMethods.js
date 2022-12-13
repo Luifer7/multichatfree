@@ -70,8 +70,8 @@ export function useAmdin() {
     useData.users = usuarios
     currentCompare = usuarios
 
-     currentCompare = currentCompare.filter(field => field.id === useData.currentUser.id)
-     useData.users = useData.users.filter(field => field.id != useData.currentUser.id)
+     currentCompare = currentCompare.filter(field => field.id === useData.currentUser?.id)
+     useData.users = useData.users.filter(field => field.id != useData.currentUser?.id)
      idCurrentUser = idCurrentUser.filter(field => field.id === currentCompare[0]?.idDocument )
      useData.idDocCurrentUser = idCurrentUser[0].id
   }

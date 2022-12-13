@@ -9,10 +9,8 @@
                     <i v-if="useData.estado === 2" class="bi bi-circle-fill text-danger" style="font-size: .7em;" ></i>
                 <img
                     :src="useData.currentUser?.foto"
-                    width="35"
-                    height="35"
                     style="object-fit: cover; cursor: pointer;"
-                    class="rounded-circle dropdown-toggle"
+                    class="rounded-circle dropdown-toggle img-perfil"
                     data-bs-toggle="dropdown" aria-expanded="false"
                     alt=""
                     @click="getDateNow()"
@@ -46,9 +44,6 @@
                
                 </div>
 
-              
-
-               
             </div>
 
 
@@ -87,6 +82,8 @@ const cerrar = () => {
 
   })
 }
+// 261305
+
 
 </script>
 
@@ -108,4 +105,17 @@ display: flex; align-items: center; justify-content: center;
 .closeclose:hover{
     color: purple;
 }
+
+.img-perfil {
+    border: 3px solid blue;
+    width: 40px;
+    height: 40px;
+    transition: .6s ease all;
+}
+.img-perfil:hover {
+    border: 2px solid blue;
+    width: 43px;
+    height: 43px;
+}
+
 </style>

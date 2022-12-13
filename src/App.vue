@@ -1,3 +1,5 @@
+
+
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import Interruptor from "./components/Interruptor.vue";
@@ -9,13 +11,13 @@ const useData = useDataStore()
 
 <template>
 
-  <div class="box-nav flex-wrap d-flex align-items-center justify-content-between">
+  <div class="box-nav box-success flex-wrap d-flex align-items-center justify-content-between">
 
     <span class="fw-bold text-muted m-2" style="cursor: pointer;">multichatfree</span>
     
-    <Interruptor></Interruptor>
+    <Interruptor v-if="useData.isLogin" ></Interruptor>
     
-    <ProfileComponent></ProfileComponent>
+    <ProfileComponent v-if="useData.isLogin" ></ProfileComponent>
   
   </div>
 
@@ -44,6 +46,9 @@ const useData = useDataStore()
 .infoo{
   font-size: .6Sem;
 }
+
+/* ////////////  //////////// */
+
 
 
 /* CSS */
@@ -89,4 +94,5 @@ const useData = useDataStore()
 .button-21:focus:not(:active) {
   box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 .125em;
 }
+
 </style>
